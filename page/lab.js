@@ -10,7 +10,7 @@ var query5 = "Do you have a cat or a dog?";
 resp1 = prompt (query1);
 console.log ('Asking:' + query1 + ', response: ' + resp1);
 resp2 = prompt (query2);
-console.log ('Asking:' + query1 + ', response: ' + resp2);
+console.log ('Asking:' + query2 + ', response: ' + resp2);
 resp3 = prompt (query3);
 console.log ('Asking:' + query3 + ', response: ' + resp3);
 resp4 = prompt (query4);
