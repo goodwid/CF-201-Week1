@@ -31,3 +31,4 @@ alertText += 'I like ' + resp5 +'s but I have a bird.  ';
 alertText += 'I am sure ' + resp6 + " is a fine name in some cultures but I don't like it.  ";
 
 alert (alertText);
+document.getElementById('entry').innerHTML= alertText;
