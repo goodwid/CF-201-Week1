@@ -73,32 +73,36 @@ for (var i=0;i<questionSet.length;i++) {
 // Asking the high-low question
 var rightNumber = 86;
 var numberGuessed = false;
-var validResponse = false;
+var validResponse;
 console.log ('Asking guessing game question');
 alert ('OK, time for a guessing game!');
+
 while (!numberGuessed) {
-  answer = prompt ('Pick a number between 1 and 100');
-  console.log ('Response: '+ answer);
-  while (validResponse) {
+  validResponse = false;
+  while (!validResponse) {
+    answer = prompt ('Pick a number between 1 and 100');
+    console.log ('Response: '+ answer);
     if (answer < 1 || answer > 100) {
-      console.log ('Response valid.');
-      validResponse = true;
+      console.log ('Response not valid, re-asking');
+      alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
     } else {
-        console.log ('Response not valid, re-asking');
-        alert ('Sorry, that is not a valid response, please pick a number between 1 and 100');
+        console.log ('Response valid.');
+        validResponse = true;
     }
   } // while validResponse
+
   if (answer == rightNumber) {
     console.log ('Correct answer guessed');
     alert ('You nailed it! ' +rightNumber +' is right!');
     correctResponses++;
     numberGuessed = true;
-  } else if ((answer == rightNumber-1) || (answer == rightNumber+1)) {
-    alert ('Close enough, it was '+rightNumber +'.');
-    correctResponses++;
-    numberGuessed = true;
-  } else {
-    alert ('Sorry, that is not correct.  It was ' + rightNumber + '.');
+    break;
+  } else if (answer < rightNumber) {
+    console.log ('low.');
+    alert ('Sorry, too low.  Guess again!');
+  } else if (answer > rightNumber) {
+    console.log ('high.');
+    alert ('Sorry, too high.  Guess again!');
   }
 } // while !numberguessed
 
