@@ -34,7 +34,11 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
       var answer = prompt(questionAsked);
       console.log ('Response: '+answer);
 
-      if (/^[Nn,Oo]{0,2}$/.test(answer) || /^[Yy,Ee,Ss]{0,3}$/.test(answer)) {
+      if (answer == null) {
+        validResponse = true;
+        console.log ('Cancel selected, breaking out');
+        break;
+      } else if ((/^[Nn,Oo]{0,2}$/.test(answer) || /^[Yy,Ee,Ss]{0,3}$/.test(answer)) && answer != '') {
         console.log ('Response valid.');
         validResponse = true;
       } else {
