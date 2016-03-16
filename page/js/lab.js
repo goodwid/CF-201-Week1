@@ -1,11 +1,11 @@
 // 201
 // 3-tue-lecture code demo
-var questionSet = ([
+var questionSet = [
   {
-    "question": "Was I born on the moon?",
-    "answer": "Y",
-    "correctFollowup": "Nice, I was born on the moon",
-    "incorrectFollowup": "No, I was actually born on the moon"
+    "question": "Was I born in Oregon?",
+    "answer": "N",
+    "correctFollowup": "Correct, I was not born on in Oregon.",
+    "incorrectFollowup": "Actually, I was born in California."
   },
   {
     "question": "Am I a Taurus?",
@@ -19,7 +19,7 @@ var questionSet = ([
     "correctFollowup": "Nice, I was born on the moon",
     "incorrectFollowup": "No, I was actually born on the moon"
   }
-])
+]
 
 var correctResponses = 0;
 function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
@@ -38,10 +38,10 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
   }
 }
 
-// var userName = prompt('What is your name?');
-// console.log('The user said their name is ' + userName);
-//
-// alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click "ok", then answer Y or N to the next question.');
+var userName = prompt('What is your name?');
+console.log('The user said their name is ' + userName);
+
+alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click "ok", then answer Y or N to the next question.');
 
 for (var i=0;i<questionSet.length;i++) {
   if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
@@ -50,6 +50,11 @@ for (var i=0;i<questionSet.length;i++) {
 }
 
 console.log (correctResponses);
+if (correctResponses < questionSet.length/2) {
+  alert ('Sorry, you only got ' + correctResponses + ' answers correct.');
+} else {
+  alert ('Congratulations, you got ' + correctResponses + ' answers correct!');
+}
 
 // var userResponse = prompt('Was, I born on the moon?');
 // console.log('userResponse: ' + userResponse);
