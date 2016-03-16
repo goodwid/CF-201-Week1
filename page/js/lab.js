@@ -1,5 +1,8 @@
-// 201
-// 3-tue-lecture code demo
+/*
+  I made a nice function for questions but it doesn't handle odd user input
+  very well at all.
+
+*/
 var questionSet = [
   {
     "question": "Was I born in Oregon?",
@@ -14,28 +17,44 @@ var questionSet = [
     "incorrectFollowup": "No, I'm not a Taurus at all.. Do I act like one?"
   },
   {
-    "question": "Was I born on the moon",
-    "answer": "Y",
-    "correctFollowup": "Nice, I was born on the moon",
-    "incorrectFollowup": "No, I was actually born on the moon"
+    "question": "Have I been to England?",
+    "answer": "N",
+    "correctFollowup": "You're right, I've never been to England.",
+    "incorrectFollowup": "No, sorry, I haven't been there.  Someday..."
   }
 ]
 
 var correctResponses = 0;
-function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
-  console.log ('Asking '+questionAsked+', Correct answer is '+correctAnswer);
-  var answer = prompt(questionAsked);
-  console.log ('Response: '+answer);
-  modAnswer = answer[0].toUpperCase();
-  console.log (modAnswer);
 
-  if (modAnswer === correctAnswer) {
-    alert (correctFollowup);
-    return true;
-  } else  {
-    alert (incorrectFollowup);
-    return false;
-  }
+function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
+    var noTest = new RegExp ('[Nn,Oo]');
+    var yesTest = new RexExp ('[Yy,Ee,Ss]');
+    var validResponse = false;
+
+    console.log ('Asking '+questionAsked+', Correct answer is '+correctAnswer);
+    while (!validResponse) {
+      var answer = prompt(questionAsked);
+      console.log ('Response: '+answer);
+
+      if (noTest.test(answer) && yesTest.test(answer)) {
+        validResponse = true
+      } else {
+        alert ('Sorry, that is not a valid response, please answer Yes or No.');
+        console.log ('Respons not valid, re-asking');
+      }
+    }
+    var modAnswer = answer[0].toUpperCase();
+
+    if (modAnswer === correctAnswer) {
+      alert (correctFollowup);
+      console.log ('User answered correctly');
+      return true;
+    } else  {
+      alert (incorrectFollowup);
+      console.log ('User answered incorrectly');
+      return false;
+    }
+
 }
 
 var userName = prompt('What is your name?');
@@ -47,22 +66,12 @@ for (var i=0;i<questionSet.length;i++) {
   if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
     correctResponses++;
   }
+  console.log ('Asking question '+ i);
 }
 
-console.log (correctResponses);
+console.log ('Number of questions answer correctly: ' + correctResponses);
 if (correctResponses < questionSet.length/2) {
   alert ('Sorry, you only got ' + correctResponses + ' answers correct.');
 } else {
   alert ('Congratulations, you got ' + correctResponses + ' answers correct!');
 }
-
-// var userResponse = prompt('Was, I born on the moon?');
-// console.log('userResponse: ' + userResponse);
-//
-// if (userResponse.toLowerCase() === 'n' || userResponse.toUpperCase() === 'NO') {
-//   alert('Nope, I was actualy born on the moon. I\'m a moonian computer language.');
-// } else if (userResponse === 'Y') { // TODO: Make this more robust!
-//   alert('Nice, I was born on the moon');
-// } else {
-//   alert('Ooops!, you should have given a Y or N, so you lose this round.');
-// }
