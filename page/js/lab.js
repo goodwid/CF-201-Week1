@@ -11,16 +11,22 @@ var questionSet = [
     "incorrectFollowup": "Actually, I was born in California."
   },
   {
-    "question": "Am I a Taurus?",
+    "question": "Is my favorite food pizza?",
     "answer": "N",
-    "correctFollowup": "Correct, I'm actually a Saggitarius",
-    "incorrectFollowup": "No, I'm not a Taurus at all.. Do I act like one?"
+    "correctFollowup": "Correct, I'm more fond of hamburgers!",
+    "incorrectFollowup": "Sorry, I love pizza but gimme a hamburger any day!"
   },
   {
-    "question": "Have I been to England?",
-    "answer": "N",
-    "correctFollowup": "You're right, I've never been to England.",
-    "incorrectFollowup": "No, sorry, I haven't been there.  Someday..."
+    "question": "Have I been to Brazil?",
+    "answer": "Y",
+    "correctFollowup": "You're right, I visited Brazil in 2006. It was beautiful.",
+    "incorrectFollowup": "No, I did actually go there a while ago.  I have pictures to prove it!"
+  },
+  {
+    "question": "Have I ever worked in a restaurant?",
+    "answer": "Y",
+    "correctFollowup": "Yes, I worked in a Burger King right after college.",
+    "incorrectFollowup": "I did actually work in a Burger King, and liked it!"
   }
 ]
 
@@ -86,7 +92,10 @@ while (!numberGuessed) {
   while (!validResponse) {
     answer = prompt ('Pick a number between 1 and 100');
     console.log ('Response: '+ answer);
-    if (answer < 1 || answer > 100) {
+    if (answer == null) {
+      console.log ('cancelling out of validResponse while loop');
+      break;
+    } else if (answer < 1 || answer > 100) {
       console.log ('Response not valid, re-asking');
       alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
     } else {
@@ -94,8 +103,10 @@ while (!numberGuessed) {
         validResponse = true;
     }
   } // while validResponse
-
-  if (answer == rightNumber) {
+  if (answer == null ) {
+    console.log ('cancelling out of numberGuessed while loop');
+    break;
+  } else if (answer == rightNumber) {
     console.log ('Correct answer guessed');
     alert ('You nailed it! ' +rightNumber +' is right!');
     correctResponses++;
