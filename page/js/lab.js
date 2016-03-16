@@ -81,7 +81,7 @@ for (var i=0;i<questionSet.length;i++) {
 }
 
 // Asking the high-low question
-var rightNumber = 86;
+var rightNumber = 42;
 var numberGuessed = false;
 var validResponse;
 console.log ('Asking guessing game question');
@@ -90,12 +90,12 @@ alert ('OK, time for a guessing game!');
 while (!numberGuessed) {
   validResponse = false;
   while (!validResponse) {
-    answer = prompt ('Pick a number between 1 and 100');
+    answer = prompt ('How old am I?');
     console.log ('Response: '+ answer);
     if (answer == null) {
       console.log ('cancelling out of validResponse while loop');
       break;
-    } else if (answer < 1 || answer > 100) {
+    } else if ((answer < 1 || answer > 100) || answer == '') {
       console.log ('Response not valid, re-asking');
       alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
     } else {
