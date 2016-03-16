@@ -1,8 +1,3 @@
-/*
-  I made a nice function for questions but it doesn't handle odd user input
-  very well at all.
-
-*/
 var questionSet = [
   {
     "question": "Was I born in Oregon?",
