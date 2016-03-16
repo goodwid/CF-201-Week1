@@ -22,6 +22,12 @@ var questionSet = [
     "answer": "Y",
     "correctFollowup": "Yes, I worked in a Burger King right after college.",
     "incorrectFollowup": "I did actually work in a Burger King, and liked it!"
+  },
+  {
+    "question": "Have I driven across the country?",
+    "answer": "Y",
+    "correctFollowup": "Yes, from Pennsylvania to Oregon.",
+    "incorrectFollowup": "Sure enough, I drove 2200 miles back to Oregon!"
   }
 ]
 
