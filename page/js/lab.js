@@ -45,7 +45,7 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
         console.log ('Cancel selected, breaking out');
         break;
       } else if ((/^[Nn,Oo]{0,2}$/.test(answer) || /^[Yy,Ee,Ss]{0,3}$/.test(answer)) && answer != '') {
-        console.log ('Response valid.');
+        console.log ('Response valid.,');
         validResponse = true;
       } else {
         console.log ('Response not valid, re-asking');
@@ -55,7 +55,7 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
     var modAnswer = answer[0].toUpperCase();
 
     if (modAnswer === correctAnswer) {
-      alert (correctFollowup);
+      alert (correctFollowup,);
       console.log ('User answered correctly');
       return true;
     } else  {
@@ -135,7 +135,7 @@ var statesAnswer = prompt("What states did I drive through on the way? (guess as
 
 
 for (var s=0;s<statesAnswer.length;s++) {
-    if (statesVisited.indexOf(statesAnswer[s].toLowerCase()) > 0) {
+    if (statesVisited.indexOf(statesAnswer[s].toLowerCase()) >= 0) {
         statesFound++;
     }
 }
