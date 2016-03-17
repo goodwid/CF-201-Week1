@@ -1,26 +1,27 @@
 body {
     font-family: Verdana,sans-serif;
-    background-color: #4f504f;
+    background-color: #595241;
     width: 42em;
     margin-left: 100px;
     color: yellow;
 
 }
 p {
-    color: orange;
+    color: #ACCFCC;
 }
 h1 {
-
+    color: #B8AE9C;
     text-align: center;
 }
 h2 {
+    color: #FFFFFF;
     font-family: Garamond;
 }
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: #FF4444;
+    color: #DB5724;
 }
 
 li {
@@ -30,7 +31,7 @@ li {
 
 li:before {
     content: "\2622  ";
-    color: #FF4444;
+    color: inherit;
 }
 
 .biography {
