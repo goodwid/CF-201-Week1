@@ -74,12 +74,12 @@ alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click 
 
 // Asking all the Y-N questions..
 
-for (var i=0;i<questionSet.length;i++) {
-  if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
-    correctResponses++;
-  }
-  console.log ('Asking question '+ i);
-}
+// for (var i=0;i<questionSet.length;i++) {
+//   if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
+//     correctResponses++;
+//   }
+//   console.log ('Asking question '+ i);
+// }
 
 // Asking the high-low question
 var rightNumber = 42;
@@ -96,7 +96,7 @@ while (!numberGuessed) {
     if (answer == null) {
       console.log ('cancelling out of validResponse while loop');
       break;
-    } else if ((answer < 1 || answer > 100) || answer == '') {
+    } else if ((answer < 1 || answer > 100) || answer === '' || isNaN(answer)) {
       console.log ('Response not valid, re-asking');
       alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
     } else {
@@ -104,7 +104,7 @@ while (!numberGuessed) {
         validResponse = true;
     }
   } // while validResponse
-  if (answer == null ) {
+  if (answer == null) {
     console.log ('cancelling out of numberGuessed while loop');
     break;
   } else if (answer == rightNumber) {
