@@ -6,18 +6,21 @@ body {
     color: yellow;
 
 }
-
+p {
+    color: orange;
+}
 h1 {
 
     text-align: center;
 }
 h2 {
-    font-family: Garamond,cursive;
+    font-family: Garamond;
 }
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    color: #FF4444;
 }
 
 li {
@@ -27,7 +30,7 @@ li {
 
 li:before {
     content: "\2622  ";
-    color: red;
+    color: #FF4444;
 }
 
 .biography {
