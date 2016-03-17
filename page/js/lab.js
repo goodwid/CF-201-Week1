@@ -31,7 +31,6 @@ var questionSet = [
   }
 ]
 
-var correctResponses = 0;
 
 function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
     var validResponse = false;
@@ -74,6 +73,8 @@ alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click 
 
 // Asking all the Y-N questions..
 
+var correctResponses = 0;
+
 for (var i=0;i<questionSet.length;i++) {
   if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
     correctResponses++;
@@ -85,6 +86,8 @@ for (var i=0;i<questionSet.length;i++) {
 var rightNumber = 42;
 var numberGuessed = false;
 var validResponse;
+
+
 console.log ('Asking guessing game question');
 alert ('OK, time for a guessing game!');
 
@@ -96,7 +99,7 @@ while (!numberGuessed) {
     if (answer == null) {
       console.log ('cancelling out of validResponse while loop');
       break;
-    } else if ((answer < 1 || answer > 100) || answer == '') {
+    } else if ((answer < 1 || answer > 100) || answer === '' || isNaN(answer)) {
       console.log ('Response not valid, re-asking');
       alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
     } else {
@@ -104,7 +107,7 @@ while (!numberGuessed) {
         validResponse = true;
     }
   } // while validResponse
-  if (answer == null ) {
+  if (answer == null) {
     console.log ('cancelling out of numberGuessed while loop');
     break;
   } else if (answer == rightNumber) {
@@ -122,6 +125,23 @@ while (!numberGuessed) {
   }
 } // while !numberguessed
 
+// Multiple answer guessing game
+
+var statesVisited = ["pennsylvania", "ohio", "indiana", "illinois", "iowa", "nebraska", "wyoming", "utah", "idaho", "oregon"];
+var statesFound = 0;
+
+alert ('In 2006 I drove across the country from Pennsylvania to Oregon.');
+var statesAnswer = prompt("What states did I drive through on the way? (guess as many as you like)").split(" ");
+
+
+for (var s=0;s<statesAnswer.length;s++) {
+    if (statesVisited.indexOf(statesAnswer[s].toLowerCase()) > 0) {
+        statesFound++;
+    }
+}
+alert ('Congratulations, you found '+ statesFound + ' out of ' + statesVisited.length + ' states!');
+
+// Notify the user of their score.
 
 console.log ('Number of questions answer correctly: ' + correctResponses);
 if (correctResponses === 0) {
