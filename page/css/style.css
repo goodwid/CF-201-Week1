@@ -1,31 +1,35 @@
 body {
-  font-fmaily: Verdana;
-  background-color: #c8c8A0;
-  width: 42em;
-  margin-left: 100px;
+    font-family: Verdana,sans-serif;
+    background-color: #4f504f;
+    width: 42em;
+    margin-left: 100px;
+    color: yellow;
 
 }
 
 h1 {
-  font-family: Times New Roman;
-  text-align: center;
+
+    text-align: center;
+}
+h2 {
+    font-family: Garamond,cursive;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 li {
-  padding-left: 1em;
-  text-indent: -.5em;
+    padding-left: 1em;
+    text-indent: -.5em;
 }
 
 li:before {
-  content: "\2622  ";
-  color: red;
+    content: "\2622  ";
+    color: red;
 }
 
 .biography {
-  font-size: 1.1em;
+    font-size: 1.3em;
 }
