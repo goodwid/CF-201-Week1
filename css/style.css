@@ -5,19 +5,43 @@ body {
     background-color: #595241;
     width: 42em;
     margin-left: 100px;
-    color: yellow;
-
 }
+
 p {
     color: #ACCFCC;
 }
+
 h1 {
     color: #B8AE9C;
     text-align: center;
 }
+
 h2 {
     color: #FFFFFF;
     font-family: Garamond;
+}
+
+header: {
+    float:left;
+}
+
+section: {
+    clear: both;
+}
+
+nav {
+    height: 50px;
+    float: right;
+}
+
+nav a {
+    text-decoration: none;
+    border: 2px solid #DB5724;
+    padding: 4px;
+    border-radius: 6px;
+    color: #FFFFFF;
+    background-color: #736655;
+
 }
 ul {
     list-style: none;
@@ -37,5 +61,5 @@ li:before {
 }
 
 .biography {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
