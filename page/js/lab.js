@@ -55,7 +55,7 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
     var modAnswer = answer[0].toUpperCase();
 
     if (modAnswer === correctAnswer) {
-      alert (correctFollowup,);
+      alert (correctFollowup);
       console.log ('User answered correctly');
       return true;
     } else  {
