@@ -145,9 +145,9 @@ alert ('Congratulations, you found '+ statesFound + ' out of ' + statesVisited.l
 
 console.log ('Number of questions answer correctly: ' + correctResponses);
 if (correctResponses === 0) {
-    alert ('Sorry, you got no answers correct.');
+    alert ('Sorry, ' + userName + ', you got no answers correct.');
 } else if (correctResponses < questionSet.length/2) {
-  alert ('Sorry, you only got ' + correctResponses + ' answers correct.');
+  alert ('Sorry, ' + userName + ', you only got ' + correctResponses + ' answers correct.');
 } else {
-  alert ('Congratulations, you got ' + correctResponses + ' answers correct!');
+  alert ('Congratulations, ' + userName + ', you got ' + correctResponses + ' answers correct!');
 }
