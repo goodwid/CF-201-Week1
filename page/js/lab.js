@@ -32,10 +32,10 @@ var questionSet = [
 ]
 
 
-function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
+function askStringQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
     var validResponse = false;
-    output += questionAsked;
-    document.getElementbyId('results').innerHTML = output;
+    output += '<h2>' + questionAsked + '</h2>';
+    document.getElementById('results').innerHTML = output;
 
     console.log ('Asking '+questionAsked+', Correct answer is '+correctAnswer);
     while (!validResponse) {
@@ -57,11 +57,13 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
     var modAnswer = answer[0].toUpperCase();
 
     if (modAnswer === correctAnswer) {
-      alert (correctFollowup);
+      output += '<p>' + correctFollowup + '</p>';
+      document.getElementById('results').innerHTML = output;
       console.log ('User answered correctly');
       return true;
     } else  {
-      alert (incorrectFollowup);
+      output += '<p>' + incorrectFollowup + '</p>';
+      document.getElementById('results').innerHTML = output;
       console.log ('User answered incorrectly');
       return false;
     }
@@ -79,7 +81,7 @@ var correctResponses = 0;
 var output = '';
 
 for (var i=0;i<questionSet.length;i++) {
-  if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
+  if (askStringQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
     correctResponses++;
   }
   console.log ('Asking question '+ i);
@@ -94,39 +96,40 @@ var validResponse;
 console.log ('Asking guessing game question');
 alert ('OK, time for a guessing game!');
 
-while (!numberGuessed) {
-  validResponse = false;
-  while (!validResponse) {
-    answer = prompt ('How old am I?');
-    console.log ('Response: '+ answer);
+function askNumberQuestion
+  while (!numberGuessed) {
+    validResponse = false;
+    while (!validResponse) {
+      answer = prompt ('How old am I?');
+      console.log ('Response: '+ answer);
+      if (answer == null) {
+        console.log ('cancelling out of validResponse while loop');
+        break;
+      } else if ((answer < 1 || answer > 100) || answer === '' || isNaN(answer)) {
+        console.log ('Response not valid, re-asking');
+        alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
+      } else {
+          console.log ('Response valid.');
+          validResponse = true;
+      }
+    } // while validResponse
     if (answer == null) {
-      console.log ('cancelling out of validResponse while loop');
+      console.log ('cancelling out of numberGuessed while loop');
       break;
-    } else if ((answer < 1 || answer > 100) || answer === '' || isNaN(answer)) {
-      console.log ('Response not valid, re-asking');
-      alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
-    } else {
-        console.log ('Response valid.');
-        validResponse = true;
+    } else if (answer == rightNumber) {
+      console.log ('Correct answer guessed');
+      alert ('You nailed it! ' +rightNumber +' is right!');
+      correctResponses++;
+      numberGuessed = true;
+      break;
+    } else if (answer < rightNumber) {
+      console.log ('low.');
+      alert ('Sorry, too low.  Guess again!');
+    } else if (answer > rightNumber) {
+      console.log ('high.');
+      alert ('Sorry, too high.  Guess again!');
     }
-  } // while validResponse
-  if (answer == null) {
-    console.log ('cancelling out of numberGuessed while loop');
-    break;
-  } else if (answer == rightNumber) {
-    console.log ('Correct answer guessed');
-    alert ('You nailed it! ' +rightNumber +' is right!');
-    correctResponses++;
-    numberGuessed = true;
-    break;
-  } else if (answer < rightNumber) {
-    console.log ('low.');
-    alert ('Sorry, too low.  Guess again!');
-  } else if (answer > rightNumber) {
-    console.log ('high.');
-    alert ('Sorry, too high.  Guess again!');
-  }
-} // while !numberguessed
+  } // while !numberguessed
 
 // Multiple answer guessing game
 
