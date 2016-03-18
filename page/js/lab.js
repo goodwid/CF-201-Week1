@@ -30,7 +30,7 @@ var questionSet = [
     "incorrectFollowup": "Sure enough, I drove 2200 miles back to Oregon!"
   }
 ]
-
+var statesVisited = ["pennsylvania", "ohio", "indiana", "illinois", "iowa", "nebraska", "wyoming", "utah", "idaho", "oregon"];
 
 function askStringQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
     var validResponse = false;
@@ -111,6 +111,24 @@ function askNumberQuestion(questionAsked, rightNumber, lowerRange, upperRange) {
   } // while !numberguessed
 }
 
+// Multiple answer guessing game
+function askArrayQuestion(questionAsked, arr) {
+  console.log ('Asking guessing game question');
+
+  var arrItemsFound = 0;
+  output += '<h2>' + questionAsked + '</h2>';
+  document.getElementById('results').innerHTML = output;
+  var arrAnswer = prompt(questionAsked + ' (Guess as many as you like, separated by spaces.)').split(" ");
+
+  for (var s=0;s<arrAnswer.length;s++) {
+      if (arr.indexOf(arrAnswer[s].toLowerCase()) >= 0) {
+          arrItemsFound++;
+      }
+  }
+  output += '<p>Congratulations, you found ' + arrItemsFound + ' out of ' + arr.length + ' !</p>';
+  document.getElementById('results').innerHTML = output;
+}
+
 var userName = prompt('What is your name?');
 console.log('The user said their name is ' + userName);
 
@@ -128,30 +146,12 @@ for (var i=0;i<questionSet.length;i++) {
   console.log ('Asking question '+ i);
 }
 
+// Asking the high-low question
 askNumberQuestion('How old am I?', 42, 1, 100);
 
-// Asking the high-low question
-var rightNumber = 42;
-
-
-console.log ('Asking guessing game question');
-alert ('OK, time for a guessing game!');
-
-// Multiple answer guessing game
-
-var statesVisited = ["pennsylvania", "ohio", "indiana", "illinois", "iowa", "nebraska", "wyoming", "utah", "idaho", "oregon"];
-var statesFound = 0;
-
-alert ('In 2006 I drove across the country from Pennsylvania to Oregon.');
-var statesAnswer = prompt("What states did I drive through on the way? (guess as many as you like)").split(" ");
-
-
-for (var s=0;s<statesAnswer.length;s++) {
-    if (statesVisited.indexOf(statesAnswer[s].toLowerCase()) >= 0) {
-        statesFound++;
-    }
-}
-alert ('Congratulations, you found '+ statesFound + ' out of ' + statesVisited.length + ' states!');
+output = '<h2>In 2006 I drove across the country from Pennsylvania to Oregon.</h2>' + output;
+document.getElementById('results').innerHTML = output;
+askArrayQuestion('How many states did I visit?', statesVisited);
 
 // Notify the user of their score.
 
