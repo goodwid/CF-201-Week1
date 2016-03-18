@@ -34,6 +34,8 @@ var questionSet = [
 
 function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
     var validResponse = false;
+    output += questionAsked;
+    document.getElementbyId('results').innerHTML = output;
 
     console.log ('Asking '+questionAsked+', Correct answer is '+correctAnswer);
     while (!validResponse) {
@@ -74,6 +76,7 @@ alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click 
 // Asking all the Y-N questions..
 
 var correctResponses = 0;
+var output = '';
 
 for (var i=0;i<questionSet.length;i++) {
   if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
