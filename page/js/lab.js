@@ -125,7 +125,20 @@ function askArrayQuestion(questionAsked, arr) {
           arrItemsFound++;
       }
   }
-  output += '<p>Congratulations, you found ' + arrItemsFound + ' out of ' + arr.length + ' !</p>';
+  output += '<p>Congratulations, you found ' + arrItemsFound + ' out of ' + arr.length + '!</p>';
+  document.getElementById('results').innerHTML = output;
+}
+
+// Notify the user of their score.
+function summarize(num, userName) {
+  console.log ('Number of questions answer correctly: ' + num);
+  if (num === 0) {
+      output = '<h2 id="summary">Sorry, ' + userName + ', you got no answers correct.</h2>' + output;
+  } else if (num < questionSet.length/2) {
+    output = '<h2 id="summary">Sorry, ' + userName + ', you only got ' + num + ' answers correct.</h2>' + output;
+  } else {
+    output = '<h2 id="summary">Congratulations, ' + userName + ', you got ' + num + ' answers correct!</h2>' + output;
+  }
   document.getElementById('results').innerHTML = output;
 }
 
@@ -134,11 +147,10 @@ console.log('The user said their name is ' + userName);
 
 alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click "ok", then answer Y or N to the next question.');
 
-// Asking all the Y-N questions..
-
 var correctResponses = 0;
 var output = '';
 
+// Asking all the Y-N questions..
 for (var i=0;i<questionSet.length;i++) {
   if (askStringQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
     correctResponses++;
@@ -149,17 +161,8 @@ for (var i=0;i<questionSet.length;i++) {
 // Asking the high-low question
 askNumberQuestion('How old am I?', 42, 1, 100);
 
-output = '<h2>In 2006 I drove across the country from Pennsylvania to Oregon.</h2>' + output;
+output = '<h2 id="crossCountry">In 2006 I drove across the country from Pennsylvania to Oregon.</h2>' + output;
 document.getElementById('results').innerHTML = output;
 askArrayQuestion('How many states did I visit?', statesVisited);
 
-// Notify the user of their score.
-
-console.log ('Number of questions answer correctly: ' + correctResponses);
-if (correctResponses === 0) {
-    alert ('Sorry, ' + userName + ', you got no answers correct.');
-} else if (correctResponses < questionSet.length/2) {
-  alert ('Sorry, ' + userName + ', you only got ' + correctResponses + ' answers correct.');
-} else {
-  alert ('Congratulations, ' + userName + ', you got ' + correctResponses + ' answers correct!');
-}
+summarize(correctResponses, userName);
