@@ -30,10 +30,32 @@ var questionSet = [
     "incorrectFollowup": "Sure enough, I drove 2200 miles back to Oregon!"
   }
 ]
+var statesVisited = ["pennsylvania", "ohio", "indiana", "illinois", "iowa", "nebraska", "wyoming", "utah", "idaho", "oregon"];
 
+function getUnique(arr) {
+  var results = [];
+  var present;
+  var comparator;
+  for (var i=0;i<arr.length;i++) {
+    comparator = arr[i];
+    present = false;
+    for (var j=0;j<results.length;j++) {
+      if (comparator === results[j]) {
+        present = true;
+      }  // if
+    }  // for j
+    if (!present) {
+      results.push (comparator);
+    } // if
+  } // for i
+  return results;
+ // Return an array that contains only unique values here
+} // function
 
-function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
+function askStringQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
     var validResponse = false;
+    output += '<h2>' + questionAsked + '</h2>';
+    document.getElementById('results').innerHTML = output;
 
     console.log ('Asking '+questionAsked+', Correct answer is '+correctAnswer);
     while (!validResponse) {
@@ -55,15 +77,89 @@ function askQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFo
     var modAnswer = answer[0].toUpperCase();
 
     if (modAnswer === correctAnswer) {
-      alert (correctFollowup);
+      output += '<p>' + correctFollowup + '</p>';
+      document.getElementById('results').innerHTML = output;
       console.log ('User answered correctly');
       return true;
     } else  {
-      alert (incorrectFollowup);
+      output += '<p>' + incorrectFollowup + '</p>';
+      document.getElementById('results').innerHTML = output;
       console.log ('User answered incorrectly');
       return false;
     }
 
+}
+
+function askNumberQuestion(questionAsked, rightNumber, lowerRange, upperRange) {
+  var numberGuessed = false;
+  var validResponse;
+  output += '<h2>' + questionAsked + '</h2>';
+  document.getElementById('results').innerHTML = output;
+  while (!numberGuessed) {
+    validResponse = false;
+    while (!validResponse) {
+      answer = prompt (questionAsked);
+      console.log ('Response: '+ answer);
+      if (answer == null) {
+        console.log ('cancelling out of validResponse while loop');
+        break;
+      } else if ((answer < lowerRange || answer > upperRange) || answer === '' || isNaN(answer)) {
+        console.log ('Response not valid, re-asking');
+        alert ('Sorry, that is not a valid response, please make sure your number is between ' + lowerRange + ' and ' + upperRange + '.');
+      } else {
+          console.log ('Response valid.');
+          validResponse = true;
+      }
+    } // while validResponse
+    if (answer == null) {
+      console.log ('cancelling out of numberGuessed while loop');
+      break;
+    } else if (answer == rightNumber) {
+      console.log ('Correct answer guessed');
+      output += '<p>You nailed it! ' +rightNumber +' is right!</p>';
+      document.getElementById('results').innerHTML = output;
+      correctResponses++;
+      numberGuessed = true;
+      break;
+    } else if (answer < rightNumber) {
+      console.log ('low.');
+      alert ('Sorry, too low.  Guess again!');
+    } else if (answer > rightNumber) {
+      console.log ('high.');
+      alert ('Sorry, too high.  Guess again!');
+    }
+  } // while !numberguessed
+}
+
+// Multiple answer guessing game
+function askArrayQuestion(questionAsked, arr) {
+  console.log ('Asking guessing game question');
+
+  var arrItemsFound = 0;
+  output += '<h2>' + questionAsked + '</h2>';
+  document.getElementById('results').innerHTML = output;
+  var arrAnswer = getUnique(prompt(questionAsked + ' (Guess as many as you like, separated by spaces.)').split(" "));
+
+  for (var s=0;s<arrAnswer.length;s++) {
+      if (arr.indexOf(arrAnswer[s].toLowerCase()) >= 0) {
+          arrItemsFound++;
+      }
+  }
+  output += '<p>Congratulations, you found ' + arrItemsFound + ' out of ' + arr.length + '!</p>';
+  document.getElementById('results').innerHTML = output;
+}
+
+// Notify the user of their score.
+function summarize(num, userName) {
+  console.log ('Number of questions answer correctly: ' + num);
+  if (num === 0) {
+      output = '<h2 id="summary">Sorry, ' + userName + ', you got no answers correct.</h2>' + output;
+  } else if (num < questionSet.length/2) {
+    output = '<h2 id="summary">Sorry, ' + userName + ', you only got ' + num + ' answers correct.</h2>' + output;
+  } else {
+    output = '<h2 id="summary">Congratulations, ' + userName + ', you got ' + num + ' answers correct!</h2>' + output;
+  }
+  document.getElementById('results').innerHTML = output;
 }
 
 var userName = prompt('What is your name?');
@@ -71,83 +167,22 @@ console.log('The user said their name is ' + userName);
 
 alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click "ok", then answer Y or N to the next question.');
 
-// Asking all the Y-N questions..
-
 var correctResponses = 0;
+var output = '';
 
+// Asking all the Y-N questions..
 for (var i=0;i<questionSet.length;i++) {
-  if (askQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
+  if (askStringQuestion (questionSet[i].question,questionSet[i].answer, questionSet[i].correctFollowup, questionSet[i].incorrectFollowup)) {
     correctResponses++;
   }
   console.log ('Asking question '+ i);
 }
 
 // Asking the high-low question
-var rightNumber = 42;
-var numberGuessed = false;
-var validResponse;
+askNumberQuestion('How old am I?', 42, 1, 100);
 
+output = '<h2 id="crossCountry">In 2006 I drove across the country from Pennsylvania to Oregon.</h2>' + output;
+document.getElementById('results').innerHTML = output;
+askArrayQuestion('How many states did I visit?', statesVisited);
 
-console.log ('Asking guessing game question');
-alert ('OK, time for a guessing game!');
-
-while (!numberGuessed) {
-  validResponse = false;
-  while (!validResponse) {
-    answer = prompt ('How old am I?');
-    console.log ('Response: '+ answer);
-    if (answer == null) {
-      console.log ('cancelling out of validResponse while loop');
-      break;
-    } else if ((answer < 1 || answer > 100) || answer === '' || isNaN(answer)) {
-      console.log ('Response not valid, re-asking');
-      alert ('Sorry, that is not a valid response, please make sure your number is between 1 and 100');
-    } else {
-        console.log ('Response valid.');
-        validResponse = true;
-    }
-  } // while validResponse
-  if (answer == null) {
-    console.log ('cancelling out of numberGuessed while loop');
-    break;
-  } else if (answer == rightNumber) {
-    console.log ('Correct answer guessed');
-    alert ('You nailed it! ' +rightNumber +' is right!');
-    correctResponses++;
-    numberGuessed = true;
-    break;
-  } else if (answer < rightNumber) {
-    console.log ('low.');
-    alert ('Sorry, too low.  Guess again!');
-  } else if (answer > rightNumber) {
-    console.log ('high.');
-    alert ('Sorry, too high.  Guess again!');
-  }
-} // while !numberguessed
-
-// Multiple answer guessing game
-
-var statesVisited = ["pennsylvania", "ohio", "indiana", "illinois", "iowa", "nebraska", "wyoming", "utah", "idaho", "oregon"];
-var statesFound = 0;
-
-alert ('In 2006 I drove across the country from Pennsylvania to Oregon.');
-var statesAnswer = prompt("What states did I drive through on the way? (guess as many as you like)").split(" ");
-
-
-for (var s=0;s<statesAnswer.length;s++) {
-    if (statesVisited.indexOf(statesAnswer[s].toLowerCase()) >= 0) {
-        statesFound++;
-    }
-}
-alert ('Congratulations, you found '+ statesFound + ' out of ' + statesVisited.length + ' states!');
-
-// Notify the user of their score.
-
-console.log ('Number of questions answer correctly: ' + correctResponses);
-if (correctResponses === 0) {
-    alert ('Sorry, ' + userName + ', you got no answers correct.');
-} else if (correctResponses < questionSet.length/2) {
-  alert ('Sorry, ' + userName + ', you only got ' + correctResponses + ' answers correct.');
-} else {
-  alert ('Congratulations, ' + userName + ', you got ' + correctResponses + ' answers correct!');
-}
+summarize(correctResponses, userName);
