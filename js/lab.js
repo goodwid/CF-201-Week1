@@ -163,6 +163,9 @@ function summarize(num, userName) {
 }
 
 var userName = prompt('What is your name?');
+if (userName === null) {
+    stoppingThePageOnPurpose(); // hack to end execution with a 'not defined' error.
+}
 console.log('The user said their name is ' + userName);
 
 alert('Hi, ' + userName + '!  Prepare for some questions about me. Please click "ok", then answer Y or N to the next question.');
@@ -183,6 +186,7 @@ askNumberQuestion('How old am I?', 42, 1, 100);
 
 output = '<h2 id="crossCountry">In 2006 I drove across the country from Pennsylvania to Oregon.</h2>' + output;
 document.getElementById('results').innerHTML = output;
-askArrayQuestion('How many states did I visit?', statesVisited);
+
+askArrayQuestion('Which states did I visit as I drove across the country?', statesVisited);
 
 summarize(correctResponses, userName);
