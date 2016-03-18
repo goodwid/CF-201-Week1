@@ -32,6 +32,26 @@ var questionSet = [
 ]
 var statesVisited = ["pennsylvania", "ohio", "indiana", "illinois", "iowa", "nebraska", "wyoming", "utah", "idaho", "oregon"];
 
+function getUnique(arr) {
+  var results = [];
+  var present;
+  var comparator;
+  for (var i=0;i<arr.length;i++) {
+    comparator = arr[i];
+    present = false;
+    for (var j=0;j<results.length;j++) {
+      if (comparator === results[j]) {
+        present = true;
+      }  // if
+    }  // for j
+    if (!present) {
+      results.push (comparator);
+    } // if
+  } // for i
+  return results;
+ // Return an array that contains only unique values here
+} // function
+
 function askStringQuestion (questionAsked, correctAnswer, correctFollowup, incorrectFollowup) { // Expecting Y or N passed as correctAnswer
     var validResponse = false;
     output += '<h2>' + questionAsked + '</h2>';
@@ -118,7 +138,7 @@ function askArrayQuestion(questionAsked, arr) {
   var arrItemsFound = 0;
   output += '<h2>' + questionAsked + '</h2>';
   document.getElementById('results').innerHTML = output;
-  var arrAnswer = prompt(questionAsked + ' (Guess as many as you like, separated by spaces.)').split(" ");
+  var arrAnswer = getUnique(prompt(questionAsked + ' (Guess as many as you like, separated by spaces.)').split(" "));
 
   for (var s=0;s<arrAnswer.length;s++) {
       if (arr.indexOf(arrAnswer[s].toLowerCase()) >= 0) {
